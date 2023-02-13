@@ -1,0 +1,7 @@
+.cart{
+    position: fixed;
+    background-color: aqua;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 2%;
+}
