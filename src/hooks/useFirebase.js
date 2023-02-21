@@ -4,10 +4,11 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   onAuthStateChanged,
-  signOut
-} from "firebase/auth"; 
+  signOut,
+  getIdToken,
+} from "firebase/auth";
 
-import initializeAuthentication from '../Firebase/firebase.init'
+import initializeAuthentication from "../Firebase/firebase.init";
 
 initializeAuthentication();
 const useFirebase = () => {
@@ -17,7 +18,7 @@ const useFirebase = () => {
   const googleProvider = new GoogleAuthProvider();
 
   const signInUsingGoogle = () => {
-    return signInWithPopup(auth, googleProvider)
+    return signInWithPopup(auth, googleProvider);
   };
 
   const logOut = () => {
@@ -29,6 +30,7 @@ const useFirebase = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        getIdToken(user).then((idToken) => localStorage.setItem('idToken', idToken));
         setUser(user);
       }
     });
